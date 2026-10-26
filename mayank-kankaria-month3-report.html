@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LinkedIn Performance Report — Month 3 | Mayank Kankaria</title>
+<meta name="description" content="LinkedIn Performance Report, Month 3, prepared by the GroNXT team for Mr. Mayank Kankaria — reach, engagement and network growth." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+(function(){
+  var sources = [
+    'https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js',
+    'https://unpkg.com/chart.js@4.4.4/dist/chart.umd.min.js'
+  ];
+  var i = 0;
+  function ready(){ window.dispatchEvent(new Event('chartjs-ready')); }
+  function tryNext(){
+    if (i >= sources.length){ ready(); return; }
+    var s = document.createElement('script');
+    s.src = sources[i++];
+    s.onload = ready;
+    s.onerror = tryNext;
+    document.head.appendChild(s);
+  }
+  tryNext();
+})();
+</script>
+<style>
+  :root{
+    --ink: #101828;
+    --ink-soft: #2b3344;
+    --paper: #FAF8F3;
+    --paper-dim: #F0ECE1;
+    --card: #FFFFFF;
+    --line: #E4DFD2;
+    --line-dark: #2A3245;
+    --gold: #B8892F;
+    --gold-soft: #E7CE9C;
+    --teal: #1F6F63;
+    --teal-light: #4C9C8D;
+    --brick: #A85239;
+    --muted: #6B7280;
+    --radius-s: 3px;
+    --radius-m: 6px;
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter', -apple-system, sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  p{ margin:0; line-height:1.6; }
+  a{ color:inherit; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 32px; }
+  ::selection{ background:var(--gold-soft); }
+
+  .shell{ display:grid; grid-template-columns:220px 1fr; }
+  @media (max-width:980px){ .shell{ grid-template-columns:1fr; } }
+
+  .rail{
+    position:sticky; top:0; align-self:start; height:100vh;
+    background:var(--ink); color:#cdd3de;
+    padding:28px 20px; display:flex; flex-direction:column; gap:24px;
+    border-right:1px solid var(--line-dark);
+  }
+  @media (max-width:980px){
+    .rail{ position:sticky; height:auto; flex-direction:row; align-items:center;
+      overflow-x:auto; padding:14px 16px; gap:18px; z-index:40; top:0; }
+  }
+  .rail-brand{ font-family:'Fraunces',serif; font-size:15px; color:#fff; line-height:1.3; flex:none; }
+  .rail-brand small{ display:block; font-family:'Inter',sans-serif; font-size:11px; color:#8993A6; font-weight:500; margin-top:2px; }
+  .rail-nav{ display:flex; flex-direction:column; gap:1px; flex:1; }
+  @media (max-width:980px){ .rail-nav{ flex-direction:row; gap:4px; } }
+  .rail-nav a{
+    text-decoration:none; color:#9aa3b5; font-size:12.5px; font-weight:500;
+    padding:8px 10px; border-radius:var(--radius-s); white-space:nowrap;
+    border-left:2px solid transparent; transition:color .15s ease, background .15s ease, border-color .15s ease;
+  }
+  @media (max-width:980px){ .rail-nav a{ border-left:none; border-bottom:2px solid transparent; } }
+  .rail-nav a:hover{ color:#fff; }
+  .rail-nav a.active{ color:#fff; background:rgba(255,255,255,0.06); border-left-color:var(--gold); }
+  @media (max-width:980px){ .rail-nav a.active{ border-left-color:transparent; border-bottom-color:var(--gold); } }
+  .rail-foot{ font-size:11px; color:#6b7488; flex:none; }
+  @media (max-width:980px){ .rail-foot{ display:none; } }
+
+  main{ min-width:0; }
+
+  .hero{
+    background:var(--ink); color:#EDEFF3;
+    padding:64px 0 48px;
+    background-image: radial-gradient(circle at 88% 12%, rgba(184,137,47,0.14), transparent 45%);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .hero-kicker{ font-size:13px; color:var(--gold-soft); font-weight:600; margin-bottom:14px; }
+  .hero h1{ font-size:clamp(30px,4vw,44px); color:#fff; max-width:16ch; line-height:1.08; }
+  .hero-sub{ margin-top:18px; max-width:62ch; font-size:16px; color:#B7BECE; line-height:1.65; }
+  .hero-meta{ display:flex; gap:28px; margin-top:26px; flex-wrap:wrap; font-size:13px; color:#8993A6; }
+  .hero-meta b{ color:#EDEFF3; font-weight:600; }
+
+  .kpi-strip{ margin-top:40px; display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid var(--line-dark); }
+  @media (max-width:900px){ .kpi-strip{ grid-template-columns:repeat(2,1fr); } }
+  .kpi{ padding:22px 20px 6px 0; border-right:1px solid var(--line-dark); }
+  .kpi:last-child{ border-right:none; }
+  @media (max-width:900px){ .kpi{ border-right:1px solid var(--line-dark); padding:18px 14px; } .kpi:nth-child(2n){ border-right:none; } }
+  .kpi-num{ font-family:'Fraunces',serif; font-size:34px; color:#fff; font-weight:600; line-height:1; }
+  .kpi-num span{ font-size:17px; color:var(--gold-soft); font-weight:500; margin-left:2px; }
+  .kpi-label{ margin-top:8px; font-size:12.5px; color:#9aa3b5; line-height:1.4; }
+  .kpi{ position:relative; cursor:default; }
+  .info-dot{
+    display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px;
+    border-radius:50%; border:1px solid #6b7488; color:#9aa3b5; font-size:9.5px; font-style:normal;
+    font-family:'Inter',sans-serif; vertical-align:middle; margin-left:3px;
+  }
+  .kpi .tip{
+    visibility:hidden; opacity:0; position:absolute; left:0; top:calc(100% + 10px);
+    background:#1B1F27; color:#EDEFF3; font-size:12px; line-height:1.55; font-weight:400;
+    padding:12px 14px; border-radius:8px; width:240px; z-index:30; pointer-events:none;
+    box-shadow:0 12px 32px rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.08);
+    transition:opacity .15s ease, visibility .15s ease;
+  }
+  .kpi:hover .tip, .kpi:focus .tip, .kpi:focus-within .tip{ visibility:visible; opacity:1; }
+  @media (max-width:900px){ .kpi .tip{ width:200px; } }
+
+  .hero-brand{ margin-bottom:16px; }
+  .hero-logo{ height:34px; width:auto; display:block; }
+
+  section{ padding:56px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:28px; flex-wrap:wrap; }
+  .section-head h2{ font-size:26px; }
+  .section-num{ font-family:'Fraunces',serif; font-size:13px; color:var(--gold); font-weight:600; margin-bottom:6px; }
+  .section-intro{ max-width:70ch; color:var(--ink-soft); font-size:15px; margin-bottom:6px; }
+  .section-intro + .section-intro{ margin-top:10px; }
+
+  .grid-2{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:28px; align-items:start; }
+  @media (max-width:900px){ .grid-2{ grid-template-columns:1fr; } }
+  .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media (max-width:900px){ .grid-3{ grid-template-columns:1fr; } }
+  .grid-5{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  @media (max-width:900px){ .grid-5{ grid-template-columns:repeat(2,1fr); } }
+
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius-m); padding:22px; }
+  .card-title{ font-size:13px; font-weight:700; color:var(--ink); margin-bottom:4px; }
+  .card-sub{ font-size:12.5px; color:var(--muted); margin-bottom:14px; }
+
+  ul.bullets{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; }
+  ul.bullets li{ padding-left:20px; position:relative; font-size:14.5px; color:var(--ink-soft); line-height:1.6; }
+  ul.bullets li::before{ content:""; position:absolute; left:0; top:8px; width:7px; height:7px; background:var(--teal); border-radius:50%; }
+  ul.bullets li b{ color:var(--ink); }
+
+  .stat-mini-row{ display:flex; gap:22px; flex-wrap:wrap; margin-top:20px; }
+  .stat-mini{ min-width:110px; }
+  .stat-mini .n{ font-family:'Fraunces',serif; font-size:22px; font-weight:600; color:var(--teal); }
+  .stat-mini .l{ font-size:11.5px; color:var(--muted); margin-top:2px; }
+
+  .stat-card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius-m); padding:16px 18px; }
+  .stat-card .n{ font-family:'Fraunces',serif; font-size:26px; font-weight:600; color:var(--ink); }
+  .stat-card .n.teal{ color:var(--teal); }
+  .stat-card .n.gold{ color:var(--gold); }
+  .stat-card .l{ font-size:12px; color:var(--muted); margin-top:4px; line-height:1.4; }
+  .metrics-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:14px; margin-top:26px; }
+
+  .tabbar{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:20px; }
+  .tabbar button{
+    font-family:'Inter',sans-serif; font-size:13px; font-weight:600; color:var(--ink-soft);
+    background:var(--paper-dim); border:1px solid var(--line); padding:8px 16px; border-radius:20px; cursor:pointer;
+    transition:all .15s ease;
+  }
+  .tabbar button.active{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .tabbar button:hover:not(.active){ border-color:var(--teal); color:var(--teal); }
+
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  thead th{ text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); font-weight:600; padding:0 10px 10px; border-bottom:1px solid var(--line); }
+  tbody td{ padding:12px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  tbody tr:last-child td{ border-bottom:none; }
+  .badge{ display:inline-block; font-size:11px; font-weight:700; padding:3px 9px; border-radius:20px; background:var(--teal); color:#fff; }
+  .badge.gold{ background:var(--gold); }
+  .badge.low{ background:#EDE7D8; color:var(--brick); }
+
+  .people-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  @media (max-width:700px){ .people-grid{ grid-template-columns:1fr; } }
+  .person{ border:1px solid var(--line); border-radius:var(--radius-s); padding:12px 14px; background:var(--card); }
+  .person .name{ font-size:13.5px; font-weight:700; color:var(--ink); }
+  .person .role{ font-size:12px; color:var(--muted); margin-top:3px; line-height:1.4; }
+  .person .role .more{ color:var(--gold); font-weight:600; }
+
+  .funnel{ display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+  .funnel-step{ display:grid; grid-template-columns:150px 1fr 70px; align-items:center; gap:14px; font-size:13px; }
+  .funnel-bar-bg{ background:var(--paper-dim); border-radius:20px; height:14px; overflow:hidden; }
+  .funnel-bar-fill{ height:100%; border-radius:20px; background:linear-gradient(90deg,var(--teal),var(--teal-light)); }
+  .funnel-step .val{ text-align:right; font-weight:700; color:var(--ink); }
+
+  .pipeline-card{ border:1px solid var(--line); border-radius:var(--radius-m); padding:24px; background:var(--card); position:relative; overflow:hidden; }
+  .pipeline-card::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--gold); }
+  .pipeline-card .tag{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--gold); margin-bottom:10px; }
+  .pipeline-card h3{ font-size:18px; margin-bottom:8px; }
+  .pipeline-card p{ font-size:14px; color:var(--ink-soft); }
+
+  .search-row{ display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; }
+  .search-row input{
+    flex:1; min-width:220px; font-family:'Inter'; font-size:13.5px; padding:10px 14px;
+    border:1px solid var(--line); border-radius:var(--radius-s); background:var(--paper-dim);
+  }
+  .search-row input:focus{ outline:none; border-color:var(--teal); background:#fff; }
+  .table-scroll{ max-height:460px; overflow-y:auto; border:1px solid var(--line); border-radius:var(--radius-m); }
+  .table-scroll table thead{ position:sticky; top:0; background:var(--card); z-index:2; }
+  .table-scroll table{ margin:0; }
+  .table-scroll thead th{ padding:12px 14px 12px; cursor:pointer; user-select:none; white-space:nowrap; }
+  .table-scroll thead th:hover{ color:var(--teal); }
+  .table-scroll thead th .arrow{ font-size:10px; margin-left:3px; opacity:0.5; }
+  .table-scroll tbody td{ padding:11px 14px; }
+  .row-count{ font-size:12px; color:var(--muted); margin-top:8px; }
+
+  .chart-box{ position:relative; }
+
+  footer{ background:var(--ink); color:#8993A6; padding:36px 0; font-size:12.5px; }
+  footer .wrap{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  footer b{ color:#EDEFF3; }
+
+  .empty-state{ text-align:center; padding:48px 24px; color:var(--muted); font-size:14px; }
+  .empty-state .icon{ font-size:36px; margin-bottom:12px; }
+
+  .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+  @media (prefers-reduced-motion: reduce){ *{ scroll-behavior:auto !important; transition:none !important; } }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <nav class="rail" aria-label="Report sections">
+    <div class="rail-brand">
+      <img src="data:image/png;base64,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" alt="GroNXT" style="height:20px;width:auto;display:block;margin-bottom:11px;">
+      LinkedIn Performance Report
+      <small>Month 3 Cycle</small>
+    </div>
+    <div class="rail-nav" id="railNav">
+      <a href="#overview">Overview</a>
+      <a href="#content">Content Performance</a>
+      <a href="#engagement">Engagement</a>
+      <a href="#network">Network Growth</a>
+    </div>
+    <div class="rail-foot">Prepared for<br><b style="color:#cdd3de">Mr. Mayank Kankaria</b></div>
+  </nav>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+      <div class="wrap">
+        <div class="hero-brand">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKsAAABBCAYAAACuN1T9AAAYPUlEQVR4nO2de5RdVX3HP/PKJCGXzM0hD8KjGGAECS34aEGLb3xgsVMfXbaaWPtcKFXru+jSiqUUsVq0PqrLVZ2oRVBJHRRXEUSpxoqggqKMyCNPQnLmzHgyCZN59Y/v/s3ed99z7twJM7Gs3O9as2buuefs/dt7//bvvc9ACy200EILLbTQQgsttNBCCy208P8LaZavXMj22xey8RaOHKRZ/gFga5rlb16oPtoWquEWjhykWf5E4CZgGTAOfBt4a1Kt/HQ++2lJ1hYeFdIs7wHeCiwGOhFPPQe4Js3y4+azr875bKyFIxKvAF6GF3zd7nc7krLzhhaztnDISLP8ROAixJhtwIT7PQ68K6lWHp7P/lpmQAuPBu8Eftv9PYGE3zRwXVKtfGm+O2sxawuHhDTLXwX8CTCK+KgLmAR+BXxoIfpsmQEtzBlplq8G3gAsBTqQ2p9CJsDHk2rltoXot8WsLRwKXg+cjlQ+SKoC3AD0L1SnrThrC3NCmuVnoTjq0cBBYBGSqvuBFyfVyrcWqu+WzdrCXPFPiFFBjPoI4qMrF5JRYR4l62B/X+H13o2b56uLFn7DSLP8tcA/AxW8VJ0G7kiqlScvdP8tm7WFppBm+XrgdcBR7pJ5/weAfz0cNCy4GTDY31cqdVt4TOFNwDrEMxPu2hRwY1KtfO5wENCyWVuYFWmWPx94EVL7k0gjTwL3Ae85XHQcNjPApGvLhv3NI83yNcAzUJz0G0m1sqvBvauRml/lLk0hexXgo0m1cheU+yzNohm+mBfJ2lLzjx2kWX4h8C3gM8C/Ad9Ps/yNDR55M3A8kqST+DqA/wb+cyFpjdEyA44gOCfpA8BpqDpqEXAi8A9plr+g4P4zgT9Ddaogftnvfj6UVCt7DwPZM2gx65GF84GTUWx0Gm97LgGeV3D/lcAKpPqnkURdilKqNx8OgkO0QldHFo5DTGdZpwn3dxtwTnhjmuV/gYqoQQzdBewDdgPvP0z01qAwKTDY31dq8JbYp1WkVjqitqfwu3ICDXo4fHChHa7ZHLtmHL94zPG97vvl+M1v8xrWeaazjdXmPepvJb70bgLYG9IwF8c1zfKXAl9A69SBt0M7gTemAxs+ApBcuOlU4L+Ax6F1bUNO1RjwinRgw9eRw2X1q4uRtG4Gps3bXN8hJoCRsvHUSdZGjBpgJQoOd6FFWgusAVa7z8a048AQ8DCa5PuBHsSwne7agiFc9CbHNStK2lgJnIrsvym0IN2IwaZRGd33Bvv7HpqjEHgecAzKGE2jebwXqDnblFy4aV2a8TjX96TrexyYTKqVW2fuq1a+nGb51cAGxFyL0DrcCnzFtbUc1ameguePMff39enAhh8im3cVWu+lrs8JxNDWd4f73Ol+t7lr7a7fg+6+oxwtnUAO/Bwx7FA8P53xhTIE3x2LFmcdcC5SH2tdpz1ol4GXLgcRc+4FHgB+DGwB7mYemfVQQmMxM4cI2wmlXcz07no3qpg/G81DB1pEC/EMIdV5/WB/31CTNJ6M6kXPQfO9CPgFqmraAWRGW5rRBVyFBEYHXpp3pll+SVKtfCxo923Ag4A5VHcCVyTVyg43lhcCL6FWI7ajtbvStX0aihKsRRvJwlnjSIDZpgFfQmi8Zhtk3LXdgZi1DfiBG0cNoxpmmLWJ8NNyNGm/j3b8WWj3Wdqto+S5RWgXrgKegOJ7z0M55oOD/X3bQ2YoYIQZNPouvG73xSp1LiG2mClnYTCz+1YAiftsmHKf/xhJjaHZzAqHbmRjhhLuFMQcNUImHdhwT3LhpquAjwS0GKO9M83ya5NqZQ9AUq3sBt4NvDvN8jVJtfKQtZNcuCkB/ta1b22YufCxdGDDj1AYqwqc5H4vZX5qTMbQJpzGlxzWoDAaEE+m+1xFO+6NwMtRPaM1WsaoZrOGmERqMaPAzrH0bBFjHUo8dyFt4oCeThTeqVLLqKA5TpCEPB/ZgT2IsddYOwV0diCGDRlzedDfDNyz1wI3osU2tduFNOHbi+gPGdVhI9IO1u+ka+empFr5IDJzzA43W3e+iqGGkLQdBzqK1rphNCB4YD3wh8BfAb/lrplxvhup8y3Inrof2RzTaPF6kUrrBU5AMbr/QaposhEzFTgbNd+V0Fp6b3jPPDLxcvyxjphRQyRos98J3IFfmDozw6GLekaww3g1DD7Y30dSrQynWX4J8Cy8HdiNhMVFaZYPJNXKt8uIS7P8JOAtKIw1hbc7M+Adjq6twJlofQ/gHaxp/KnWuWIczd/RbswTRKdibU5mmDVe0GDSzgTOQzZZeA68A9kYXwJ+AuxCu+MRvMe/HPghkiSdyNY5HrgLMW3WaBTxgsTXQjSyKxcYI0h6mTPVCGcDz0WLngHbSu5bjphgLLrehiT4cvddjUmRVCt3pVl+GWK6FcFzi4E3pVl+t5kDBbgEOUyTiFm6EeNclg5suNP1OeJ+9qIC7DXuvnZHTxfaKKuRcCrCrfjIkDlfXcB2JMDsiAxQK2DqJGskzU4EnoLOhYeMOgoMoHTbjxDjpQWE2eC2IcnygOtzCmc6NJCIVQJmDpk2YuIefDZmnz0zG8MO9vdVHQ1mqrQTGPZzlMaTzM6ouD6eDfwMpTzLtMciNKajousH0VyPUuKEAJ8G/ggx6BLEGN3IoXo58LH4gTTLn+6eCc/+TwI/TQc2XO2ujThatyKpenlAa4ejaRli4DORMxZqmmkkpP4F2aa/drRNu34tqpABw0V+RyMzIEEO1e8g1RJiC/DvyLMfDhe2QWimiJlnEC3aKqQWVg/29x1Ak2Nn0KtA92B/n0UfjkELk7l7uoJ7w/5B0qaCpEQPmlyTDAfxTJAP9vftR5O5J2qjCOb5xgxrWZ8Qp6P53AKsHOzv2xOMvQdppYN4NRtjKQUOiM19Uq08nGb5e4BNeKafRBvyLWmWfyupVn4ePf4ONK/T+Pz/EPB3SGPO9OGwJ95kwedRamPOhikkfe9Hc3qQWgG3hiCOHMLabsSsXcg+fRH+TDjAd1F+eas1FA4kYIopggTAHOOLy1CsbxVatM8D16HFXI2iCi9Ei74WmR4pKlf7HtpkMZOdhDbAk1FE4/fctS68ChtCZW+3IzX3M7xXPTOWEG4iJ/CxSMMEknIXIFvd0Im01fnIhArnwProQgwTB83DkE8pkmrlhjTLP4NOoFrYqMvRcTEqogYgzfK/AZ6J1zBmN34hHdhQY+PGa1j0ebC/z2KmMcwJn0baYSSK7sw4e2W80ohZFyMbKwnuy1G1zTbgvgYOUJmKqkPE7GYXJUiVnIyYYDeKy06hsNdFyP4FLwnMBn4EGI/aXYtMmrcAv4ukcRte7ZmkOtb9nOb6+Txi2kFgRe/GzXVhJ/d5ivq5nEDB+2EULz0x+G4d8HwkXaeQWgxhNlscrTFPvA4FC3w5SpeegQ/IjwGvTrP8c0m1siXN8lNQqGpx0OeUG+9HDtHuNyleRGc7YtaRsrYb9VkWZ02QWngaPlwCMoJvocAxOlSHJup3JPi7G0lSUHZoHWK0V7rPhg602AeRzTqOk1Cu7TVoHBcjR3G/e8Y82RR/lugoNCeJ+7kYeDyy835h4wxo7nF9hYxvMBv6RsSoIbO2o3jzHwDXIO0RbvAhvNSPUdNP2bwn1UqaZvm7UUjrAN4k6AA+iBI6r0UCwVLjnY7m9ybVyn2FDVOsDYN56SLySyJMFrXRDP+USdYuJI1Oxe+QCbTjdgEH58PbniVuGg70JCTln4Fn1O1I1Y+6n18hW7UtoM023CuR6jWGBEm1QcSEe5Etu97dd7a7ZzWSTtuAHYP9fVk07mH323L3Icxp2Iu00bNde4bF6KVmP0Abpqd34+ZhmJmXMlXfTpPVckm1MpBm+SeR9MTROAWclWb5zcgUWow2ukUzvog22JwQrWVsvjxq9G7cXBu6CjpcirIlYfhjDHn+k8CEGfTNMm3RTmqQkYol1TokBRJkEtyKvOnvu89djuZ7AvW/wtF/AbLJlgTj2AT8h3t2FEnjFNl0z0HBcXMqj0Ve9G3I8coKzB9LIYawwPw48L/AV4E/p3YTnozMjZ3AfVGb81W++QHk6R+Lz8uDxmd2qm22bcCH0oENbY2c5SLzL7g2hsY8htYkxIT7qTH/muWhMsnajdTWkuDaOAr6t1Orrmc6DbASnzYzVWZ/jwLjg/19B4GyPHnsRHSg0FmKCi42Ia9yHFfNVDDoRcgRO5daU+brwGfd82MhDYP9fduAbyI1/HikXUCb5WXIqbwd6hbM8vEhrARvEtn61zpa1kf3vRQlCrYH147B59hj1F1rtOBJtbI1zfL3oZy7SdFF+KB/O55pr0gHNtxt42uEBt/buItor8t4zUVD16Xt3AK0I7UYNjyO1K6lSHsG+/uGg84SxBRPRm+W60ST04PPSIwhm2gMed3fGOzvs8qsEG3UZ4O2Iib9ivt7JsQx2N9njpl9BkUUzkImhCFzz9+PsmdDUWp3raP7AXffxe56O5LO1yNzYxhq5mvajcnitSAmrbixTyNz41rEiGsCmta4tn/s2jB/oCgaYEwwFYxzZswNGPaTaZafB7wKL0VtM4wiCfjtpFr5eNHzZTZqAxSF7EDCrzDv30ymci7F1+OIUR9BDBgTM4lsxPOQ2qk4wkLpPIEcnIPotd4/pN4TBu+9hngQqf/7gSxUI9RL+lVo85wR9D/hnv0BMGr2ITIVhtyYdrpr64GvAX+N3zSrEDP3UBLGolZ1j6P52Ids6VXoXVDPpZZZJ9Cc3URtrcRMOjaApbgbhq5KsBtfcDTt+lqMbPhfo8hHIRqlvQtQp3UjlNWRzIoyu8ikRJju60QLZzHHmGGG0QSsRoyyhFpGtTaORtLFmGC4wPZdXEDbnUiyF6mXGQQle93IDAj7vs2NaVEgUU2qh1piCC3gvdHzTwKmChbO0pMhbRYqWoo3Q4aRdB2O2j0eOYHHoc1gZXNLqHfczLSYwWy+Q5rl5+DfTm2FLlbKOY7W5NWlDURoQnWXpZ6tFHD5IUcDCibfwkDh5C9Bu7CuWCMyH8ZQqMQW6IC7Zvlug0neGObUxYMdQiqrJkZXMsh2ZAYkwbUJ18ZBCjJcUXpvwvUVZ1MSozlSu+14+y+8Zr9HEBPuQ5vua4g5Q7PhKago+n2uDwvJxSGgGkZo0ua7DG0IK462wnCrzBoHnppm+euTauXDRQ3MMfpTlno2IVgofWfro8wMmEAqcRwvHZehnZ9QsNgOO4DNyD5bjBh7GE3Os4CnB/d2o4mqDvb3hXFbK9wNVeAkkqoH4g5LbLVptBmqUbvD0NTEP4ykzc7oeg8BQwabvCgaEJ6WwPU97O77KvBE5KH3uO+XIXPgNJRDn0KbpahWuOlIQZrlG1H4DnxllM3vYnx2cgJ4e5rlNxakY+eKoiMr4KMEh4RGZsBOZF+GBPQiBjsmfsAxwBAKKX0a+AQKpvcDXwZ+ia+cDzEVMY/FAkPbbBwxamH8LtIMPe53WUC6WTt9EpkCISzYHaOorrMmHhqo6m0ojXsd9fW8PcCfIsa1c1IhvZY27bI2GyHN8tNRkbtJfqvovwOlprOAdoutX+X+A8uhwjTovB9GLWNWU5nD0fUn4KrHy8r03HMPISn7oPudI4aLq3DGqT8gNoK3y8J3Ks2lsgnqmW0aV9VeVtgdXe/G23WGMaOhRJoX0VED99xOdCDvJ9RuwGWoFuM8JBBi06IDabpF1Ibj6uAY7s1IettpDivYeV9SrbwfhfFM0llk4HzgLxu1PQsa1fbWbL6CctRZGy7boRkKL4U4BTlQM1KkLNgftVl0YmAmQFwAi1vGC14jWePQTQDbBGHschp55HXnzgb9SYiwnQqy80LsIZKWDlYwHDJsB/6ISQyrZR2gXrouQUdgTqZYitvczOZ1vwTVJBxADNrh/r4hqVYG3D0fxZt74OfmDWmWP3OW9hsh3mSGurmYQ5ShUE2BiM5Q5iUs4zoGpTwr1kkc1rDFD66txJfhxZNftBg9aLBhQqFQpRSdFujduHkILcpuZHrYhliMzJg4q2II7eZj3E8vngGtvK1Iuo8jqRSaOW0EG66gLnYMpXyLqvfPQZVhqwu+Cw/jFcIVqFyMNssSfGz1QeBSuy+pVrYAH8cLjm5k+h0H/H2jPhqgkT1tJYjz2nAb8lxvRwO03V9BauokoLdAdcaoumfa0aSF/ZltuqLgOWNW24nmHTdrBw3jpVdo0J+CNsPx4Waz3wHzdzu61uI31CiS1EX/iGwMX0gcosZujeZqCNVZfAXNcYhOZAqcXtBXM07KJfh/+QM+7fupgn9ReQ0SSovwobY24Jlplr9tln6KYFq0aFNbRVYdmpGwdczqFmwvsjvvQTWXYcdno1d1PwGlZE8giJtF0i5D6qoT/x/nwoleQv3hsDYkBeMXZnRQb0OWHnFBWaibqY0grEPFG1bbWdbGWnwdr9GxE51OHUfZu/BZkxbxQrQTmTrRSYdHUL3F9fF96GDhqdE1y7vvj+sqjB73IosXUZvzn0B1vpvigSbVyoPomHhRHeplaZY/KX5mFhizxuMxU2lf/MCjqg0Igv33orjgDejAoC3ck9D586tRVqkDhaAO4G03q7205IC9gsYwio+7FdEU02YMX0pvAXaiLFn40rHXIdPmlsH+vmMdvXudOVNFdu0FSBWbk5AB30EbuKYE0fVt6cvYxLCDdzN0RhszQxvwu8ixKTu3ZGhH8zazkQuExJXI9DKtZI7se8vOX7li7U+gk8vTaIMvRetzKWL+ZmGnYmPJ2ok0Vk2iKNRszTRcgzBu6Sb3x0hVnIV2u9li5yLb5hkor30HkqKP4O2fJXh1ekbQzTT+7E57RKidM4oZsy5z0wT2oAD8GUiSTrkxmJd8O2LoEwf7+zqQQ/UC/AkEo+fnyHPeQfHJS6vsjzEJjM2yELtQZu3r+DfalMHMoR4KzrylWX6FG18oMKbRi9RuaUQEcAXwYjQHS/Hp2AvSLH9XUq384yzPGybds0Whw278gcfZHMQ6FGawokD7DiSd3olsofWImY5CZsBq5Hne4wiws0vt+NzzSvzig38b3RjB8RO3OUbwb/cwjAc/DRGWLg72942hY98nAK9xdEyiwPs7EBOO4h2RHkdnuPt/idTnXUiyhuhBUrbI+7Ua0cLKfhuvo3kPCmWtR7UDZbDC8ek4GZJm+bmoBHEcr8GmkKN5ZYM2Ab1DIM3yD+NfumZaZRx4TZrlNzmHbDbYSzHKogGh4zwnzOqwuEVPkTlwOWLMpyFVcTQ+K/J4tEChCjCVEMfc9hPk+QuM6xxlkVa4NoaZQwFHsJATyCn6sqP3IpSBs3PqZ+PDOsagphk6UIXVNcDNvRs3b437wMehLZdv0gik4kcpyOMXYARl/a5BpsCJRTc5Go8miDr0btyM+1fp78cna8zZmwbe497CMiuSauWqNMtfgpw78Mei16F3uL4mqVbirF6MFG+b9kTflZpyzaDZB4eRuvoO8F6Ua96CvG1zYCxttwRJzaX44yIjaND7UPjnelRldIAoGuAWczFi1gwx7kEU4G9YxOIw017vxs12xv1e1+dbEeP+wrW3yNEZStJpdN7rarQ5v4ikUyOMORofcvfuQd7+NFHRxixe7+3IJLA2JtAGsARHiubjEWrnbQMqzZzCO0ptwDeTauVTs9Ae413IOTUfw6IET0cvOalDFBXqcc/swqv6aTee7Y6+vTD3o1Cdc3hoKT6WeB3Kb68HnopskMfhc+QWltrviM4Qgww5QncBDzYoPdsOfA7ZxJZ92YkLoZVEHgw1hr1l1Qb7+7qQSXM3slfXIXs7wZc/DiOT5zbEGPuA7SXx3PD3iJuTO/G1uJOurdHwmaK2HB5Cm/ez7jlzUKfw0no/2uR7rR33zv9F6L3/U+7vLkd7adlfGZJq5dY0yy9HYbMcX/nVDUynWV5NqpW6M3gBhpFw+Cj+3QXg34J416EeiZrVDAgms6judBTZcsvwu9De52nHhocQs7ahHdooa2YYQsHyZXi7b5ig4irczQXhsjr0bty8292/CzGohYxOQBuwHU3mHtdGtaitguC+9XkLcjTNhFiKJMskBTWwJcdCRhxdd+Fjksa0Zq7sCMfrVPylzCMOQRrPwI1jO3JsJ/A26q+B7qJ1b/Zoy6MtNhiivso/9Gbn7PEFsM3RQ7DQjaRqIxUbfRd60iH9Wcnfhe1FNKQUv5WmKfoCbJ/9lscEHmjmprmkW0s91SMNc5m0hcChqsYjCfN1grKFFhYcLWZt4TGDFrO28JhBi1lbeMzg/wBMWB6E/DXp8AAAAABJRU5ErkJggg==" alt="GroNXT logo" class="hero-logo">
+        </div>
+        <div class="hero-kicker">LinkedIn Performance Report &middot; Month 3</div>
+        <h1>LinkedIn Performance Report &mdash; Month 3</h1>
+        <p class="hero-sub">Prepared by the GroNXT team for Mr. Mayank Kankaria.<br>Goal: Build executive visibility as a CFO and Strategic Finance Leader at Novartis &mdash; through consistent content and targeted outreach to senior finance, strategy and business leaders across India&rsquo;s leading organisations.</p>
+        <div class="hero-meta">
+          <div>Focus areas: <b>CFO Strategy &middot; FP&amp;A Leadership &middot; M&amp;A &middot; Business Transformation &middot; Global Finance</b></div>
+          <div>Cycle: <b>Posts 9&ndash;12, Month 3</b></div>
+        </div>
+
+        <div class="kpi-strip">
+          <div class="kpi" tabindex="0">
+            <div class="kpi-num">3,923</div>
+            <div class="kpi-label">Total Impressions <span class="info-dot">i</span></div>
+            <div class="tip">Total impressions across Posts 9&ndash;12: Post 9 (440), Post 10 (2,121), Post 11 (423), Post 12 (939). Post 10 achieved the widest reach with 2,121 impressions.</div>
+          </div>
+          <div class="kpi" tabindex="0">
+            <div class="kpi-num">2.75<span>%</span></div>
+            <div class="kpi-label">Avg. Engagement Rate <span class="info-dot">i</span></div>
+            <div class="tip">Average engagement rate across all 4 posts. Post 9 held the highest engagement rate at 4.55%; Post 10 drove the most total engagements (56) with 50 likes, 3 comments and 3 reposts.</div>
+          </div>
+          <div class="kpi" tabindex="0">
+            <div class="kpi-num">108</div>
+            <div class="kpi-label">Total Engagements <span class="info-dot">i</span></div>
+            <div class="tip">102 likes + 3 comments + 3 reposts across all 4 posts. Post 10 led with 56 engagements, followed by Post 9 (20), Post 12 (20), and Post 11 (12).</div>
+          </div>
+          <div class="kpi" tabindex="0">
+            <div class="kpi-num">98</div>
+            <div class="kpi-label">Professionals Engaged <span class="info-dot">i</span></div>
+            <div class="tip">98 unique professionals engaged across the 4 posts (excluding self-engagements). Post 10 attracted the most engagement with 49 professionals from Novartis, Sandoz, Citi, Deloitte and more.</div>
+          </div>
+          <div class="kpi" tabindex="0">
+            <div class="kpi-num">4</div>
+            <div class="kpi-label">Posts Published <span class="info-dot">i</span></div>
+            <div class="tip">4 posts published this month: Post 9, Post 10, Post 11 and Post 12. Post 10 was the standout performer with 2,121 impressions and 2.64% engagement rate.</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ OVERVIEW ============ -->
+    <section id="overview">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-num">01 &mdash; Overview</div>
+            <h2>Month 3 at a Glance</h2>
+          </div>
+        </div>
+        <p class="section-intro">Month 3 marks a strong continuation of Mayank&rsquo;s LinkedIn journey. With 3,923 total impressions and an average engagement rate of 2.75%, the content is resonating with a highly relevant audience of finance, FP&amp;A and CFO-level professionals. Post 10 emerged as the breakout post of the cycle, achieving 2,121 impressions &mdash; well above the monthly average &mdash; and attracting 49 engaged professionals.</p>
+        <p class="section-intro">The month saw consistent engagement from senior leaders at Novartis, Sandoz, Citi, Deloitte, EY and other leading organisations, validating the positioning of Mayank as a thought leader in strategic finance and business transformation.</p>
+
+        <div class="metrics-grid">
+          <div class="stat-card">
+            <div class="n teal">3,923</div>
+            <div class="l">Total Impressions</div>
+          </div>
+          <div class="stat-card">
+            <div class="n gold">2.75%</div>
+            <div class="l">Avg. Engagement Rate</div>
+          </div>
+          <div class="stat-card">
+            <div class="n">108</div>
+            <div class="l">Total Engagements</div>
+          </div>
+          <div class="stat-card">
+            <div class="n">102</div>
+            <div class="l">Total Likes</div>
+          </div>
+          <div class="stat-card">
+            <div class="n">3</div>
+            <div class="l">Total Comments</div>
+          </div>
+          <div class="stat-card">
+            <div class="n">3</div>
+            <div class="l">Total Reposts</div>
+          </div>
+          <div class="stat-card">
+            <div class="n teal">Post 10</div>
+            <div class="l">Best Reach &mdash; 2,121 Impressions</div>
+          </div>
+          <div class="stat-card">
+            <div class="n gold">Post 9</div>
+            <div class="l">Best Eng. Rate &mdash; 4.55%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTENT PERFORMANCE ============ -->
+    <section id="content">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-num">02 &mdash; Content Performance</div>
+            <h2>Post-by-Post Performance</h2>
+          </div>
+        </div>
+        <p class="section-intro">Four posts were published in Month 3 (Posts 9&ndash;12). The chart below shows impressions per post alongside the engagement rate, highlighting both reach and resonance.</p>
+
+        <div class="chart-box" style="margin-bottom:32px;">
+          <canvas id="chartContent" height="100"></canvas>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Post</th>
+                <th>Impressions</th>
+                <th>Likes</th>
+                <th>Comments</th>
+                <th>Reposts</th>
+                <th>Total Eng.</th>
+                <th>Eng. Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>Post 9</b></td>
+                <td>440</td>
+                <td>20</td>
+                <td>0</td>
+                <td>0</td>
+                <td>20</td>
+                <td><span class="badge gold">4.55%</span></td>
+              </tr>
+              <tr>
+                <td><b>Post 10</b></td>
+                <td>2,121</td>
+                <td>50</td>
+                <td>3</td>
+                <td>3</td>
+                <td>56</td>
+                <td><span class="badge low">2.64%</span></td>
+              </tr>
+              <tr>
+                <td><b>Post 11</b></td>
+                <td>423</td>
+                <td>12</td>
+                <td>0</td>
+                <td>0</td>
+                <td>12</td>
+                <td><span class="badge low">2.84%</span></td>
+              </tr>
+              <tr>
+                <td><b>Post 12</b></td>
+                <td>939</td>
+                <td>20</td>
+                <td>0</td>
+                <td>0</td>
+                <td>20</td>
+                <td><span class="badge low">2.13%</span></td>
+              </tr>
+              <tr style="background:var(--paper-dim); font-weight:700;">
+                <td><b>Total</b></td>
+                <td><b>3,923</b></td>
+                <td><b>102</b></td>
+                <td><b>3</b></td>
+                <td><b>3</b></td>
+                <td><b>108</b></td>
+                <td><span class="badge low">2.75%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:12px; color:var(--muted); margin-top:8px;">Engagement rate = (Likes + Comments + Reposts) / Impressions &times; 100. Badge: <span class="badge" style="font-size:10px;">&#8805;5%</span> teal &middot; <span class="badge gold" style="font-size:10px;">3&ndash;5%</span> gold &middot; <span class="badge low" style="font-size:10px;">&lt;3%</span> below target</p>
+      </div>
+    </section>
+
+    <!-- ============ ENGAGEMENT ============ -->
+    <section id="engagement">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-num">03 &mdash; Engagement</div>
+            <h2>Who Engaged with Your Content</h2>
+          </div>
+        </div>
+        <p class="section-intro">98 professionals engaged across the 4 posts this month. The tabs below break down who engaged on each post &mdash; covering senior finance leaders, CFOs, directors and analysts from organisations including Novartis, Sandoz, Citi, Deloitte, EY and more.</p>
+
+        <div class="tabbar" id="peopleTabs"></div>
+        <div id="peoplePanel"></div>
+      </div>
+    </section>
+
+    <!-- ============ NETWORK GROWTH ============ -->
+    <section id="network">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-num">04 &mdash; Network Growth</div>
+            <h2>Network Outreach</h2>
+          </div>
+        </div>
+        <p class="section-intro">Month 3 focused on content quality and building organic reach. The engagement data from 98 professionals across 4 posts reflects strong resonance with Mayank&rsquo;s target audience of senior finance leaders across pharma, BFSI and consulting.</p>
+
+        <div class="funnel">
+          <div class="funnel-step">
+            <div>Posts Published</div>
+            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:100%;"></div></div>
+            <div class="val">4</div>
+          </div>
+          <div class="funnel-step">
+            <div>Total Impressions</div>
+            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:100%;"></div></div>
+            <div class="val">3,923</div>
+          </div>
+          <div class="funnel-step">
+            <div>Total Engagements</div>
+            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:40%;"></div></div>
+            <div class="val">108</div>
+          </div>
+          <div class="funnel-step">
+            <div>Professionals Engaged</div>
+            <div class="funnel-bar-bg"><div class="funnel-bar-fill" style="width:25%;"></div></div>
+            <div class="val">98</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>Prepared by <b>GroNXT</b> &mdash; LinkedIn Branding for CXOs &amp; Senior Leaders</div>
+    <div>For <b>Mr. Mayank Kankaria</b> &middot; Month 3 Report &middot; <b>MK_230526</b></div>
+  </div>
+</footer>
+
+<script>
+var POSTS = [{"label": "Post 9", "impressions": 440, "likes": 20, "comments": 0, "reposts": 0, "total_eng": 20, "eng_rate": 4.55}, {"label": "Post 10", "impressions": 2121, "likes": 50, "comments": 3, "reposts": 3, "total_eng": 56, "eng_rate": 2.64}, {"label": "Post 11", "impressions": 423, "likes": 12, "comments": 0, "reposts": 0, "total_eng": 12, "eng_rate": 2.84}, {"label": "Post 12", "impressions": 939, "likes": 20, "comments": 0, "reposts": 0, "total_eng": 20, "eng_rate": 2.13}];
+var PEOPLE = {"Post 9": [{"name": "Nidhi Jain", "role": "Lead BPA at Novartis"}, {"name": "Lavina Jain", "role": "Audit Senior Manager, Deloitte & Touche LLP"}, {"name": "Bhaskar Sharma", "role": "Process Improvement | Program Management & Business Analytics | Strategic Capacity Planning | Financial Planning | LSSGB"}, {"name": "Sunny Kumar Chauhan", "role": "LinkedIn Branding for Directors, VPs and CXOs | LinkedIn Top Voice | Job Search and Careers | Co-founder, Gronxt"}, {"name": "Deepika Gandhi", "role": "Lead at Novartis | Vodafone | Star TV"}, {"name": "Aashok Kumar Ranga", "role": "Global Head of Finance | Finance Director | FP&A | CFO Advisory | M&A | $120M+ Portfolio | SAP | Oracle | Power BI"}, {"name": "Karishma Kankaria", "role": "Mentor \u2013 Verbal at IMS Learning Resources Pvt. Ltd."}, {"name": "YAKKALA S S GANESH KUMAR", "role": "Head BPA, Sandoz Development Centre at Sandoz"}, {"name": "Anushanethri Vishwanathan", "role": "Legal Counsel and Company Secretary"}, {"name": "Mohan Achary Kamsali", "role": "Associate Director, FP&A at Sandoz | Ex-Novartis | Ex-PwC UAE & India"}, {"name": "Vivek Maroti", "role": "Managing Director, Munna Hardwares LLP"}, {"name": "Rajeev Kumar", "role": "Senior Vice President at Spark PWM Private Ltd."}, {"name": "Srilalitha Gayatri Nelaturi", "role": "Senior Manager, BPA Project Operations"}, {"name": "Raghavendra Pathak", "role": "Head \u2013 FP&A | Strategic Finance Leader | CFO Business Partner | GCC Finance | Forecasting & Analytics"}, {"name": "Naga Siva kumar Kondri", "role": "Valuation Advisor | Financial Modelling | Financial Planning & Analysis (FP&A)"}, {"name": "Manisit Sil", "role": "PMP\u00ae | Process Excellence & Program Management | Digital Transformation | SAP S/4HANA | BPM | Lean Six Sigma | Methodology & Governance"}, {"name": "Sriram Palepu", "role": "Founder, Storm Finance | Ex-CFO, Mercer Mettl | Ex-McKinsey | IIT Kharagpur"}, {"name": "Dhruv Pal", "role": "Profile headline: \u201cHello\u201d"}, {"name": "Sowjanya Chintakayala", "role": "Senior Manager Finance, IMI BPA at Novartis Hyderabad"}], "Post 10": [{"name": "Pooja Mandhana", "role": "FP&A & Transformation Leader | Scaling GCC Capabilities | Digital Finance & Process Excellence | Strategy & Project Management \u2013 Pharma, IT & BFSI | Team Management"}, {"name": "Pramod Jain", "role": "Vice President \u2013 ICRM at Citi"}, {"name": "Jay Savla", "role": "Senior Manager at Sandoz"}, {"name": "Subhankar Bose", "role": "Head S2P \u2013 Operations and T&E"}, {"name": "Jayanti Golchha", "role": "Strategy, Portfolio Management, Insights & Analytics"}, {"name": "Karishma Kankaria", "role": "Mentor \u2013 Verbal at IMS Learning Resources Pvt. Ltd."}, {"name": "Ganpat Anchaliya", "role": "Site Head, Novartis Hyderabad | Farmer by Passion | Student of Leadership"}, {"name": "Anup Maheshwari, QPFP\u00ae", "role": "Helping Business Owners & Professionals Build Wealth Through Mutual Funds | 13 Years | 200+ Clients | Raipur"}, {"name": "Aswin Kumar .S", "role": "Finance Controller | Director / VP Finance | APA | Oracle ERP | SOX/IFC | Global Investor Reporting (~USD 55B) | Transfer Pricing | FEMA/GST | Bengaluru"}, {"name": "Nidhi Jain", "role": "Lead BPA at Novartis"}, {"name": "SRINIVASAN K", "role": "Sales Enablement | Commercial Excellence | Sales Training | Performance Coaching | Salesforce (SFDC) Transformation | Data, Analytics & AI | APAC Exposure"}, {"name": "Rajeev Kumar", "role": "Senior Vice President at Spark PWM Private Ltd."}, {"name": "Abhay Laijawala", "role": "Chief Investment Officer, India"}, {"name": "Vaibhav Kadam", "role": "Novartis \u2013 ERC \u2013 India"}, {"name": "Lovleen Arya", "role": "Reimagining Medical Information at Novartis"}, {"name": "Chaitanya Suri", "role": "Procurement & Strategic Sourcing Leader | Medical Affairs, Evidence Generation & R&D | Supplier Governance & Partnerships | M&A Integrations & Separations | 3+ Digit $ Spend Management | Global & Regional Teams"}, {"name": "Shohag Bhargava", "role": "Senior Manager | M&A | Integration & Separation"}, {"name": "Shilpa Joshi", "role": "Board & Governance Professional | Former Whole-Time Director & CFO, Listed Company | Finance, Audit, Risk & Compliance | Open to Independent Director Roles"}, {"name": "Sangeeta Mohanty", "role": "Supervising Month-end AP Closure | End-to-End GRIR Process | Financial Data Analysis and Reporting | Managing Control and Compliance | Intercompany Reconciliation | Quality Check | Credit Recovery | Operational Excellence"}, {"name": "Sunny Soni", "role": "Over 16 years of experience in Operations, Service Delivery, Business Process Transformation, Transition & Migration | Specializing in Procure to Pay (P2P), Order to Cash (OTC), FP&A and Transformation"}, {"name": "Paramjeet Singh Nagpal", "role": "Head \u2013 HR & Admin at WAGO India"}, {"name": "Waseephol Vuthiparum, CFA", "role": "Chief Financial Officer | Business Unit Director | Market Access Director | Commercial Excellence Director"}, {"name": "Priya Rege Jaggi", "role": "Head of Content & Advocacy, L\u2019Or\u00e9al | Where Culture, Creators & Beauty Meet"}, {"name": "Chetan Bhutada", "role": "Lead BPA at Novartis"}, {"name": "Vivek Maroti", "role": "Managing Director, Munna Hardwares LLP"}, {"name": "venkata siva reddy ragipindi", "role": "PS at UCB"}, {"name": "Chakri Mahesh Reddy", "role": "Corporate Finance Manager | Accounting Operations, Compliance & Administration | Indian & U.S. Accounting | Zoho, QuickBooks & Tally | NTT Alumni"}, {"name": "Smita Kankaria", "role": "Finance Professional with Experience in Fintech, Financial Services and Consulting"}, {"name": "Manoj Balani", "role": "Enjoy Your Work"}, {"name": "CA Bhavna Agarwal", "role": "CA | Financial / Business Planning & Analysis | Novartis | HCL"}, {"name": "Ram Krishna", "role": "FP&A Global Senior Manager, DDIT"}, {"name": "Nitu Mohatta", "role": "FP&A | Strategic Business Partner | Digital Finance Professional"}, {"name": "Pankaj Chhajer", "role": "Director, Investment at Lodestar UM | Media Strategy | Product Innovation"}, {"name": "Meghna Rai", "role": "FP&A Professional"}, {"name": "Bhaskar Sharma", "role": "Improving Processes | Program Management & Business Analytics | Strategic Capacity Planning | Financial Planning | LSSGB"}, {"name": "Grishma Patel", "role": "Global Strategic HR Leader | Driving Transformation & Change | HR Business Partner | Coaching-Led Leadership Impact | ACC Coach | CHRP | CHRL Candidate"}, {"name": "Arjun Kuntay", "role": "Group Head (Director) | International Finance CoE | Data & Digital Expert"}, {"name": "Jiban Mukhopadhyay", "role": "Author / Independent Consultant, Corporate Economics and Governance | Former Professor, SPJIMR | Former Chief Economic Adviser, Tata Group"}, {"name": "Aashok Kumar Ranga", "role": "IIM Nagpur | Imperial UK | Global Head of Finance | Finance Director | FP&A | CFO Advisory | M&A | $120M+ Portfolio | SAP | Oracle | Power BI"}, {"name": "Shailendra Kommajoshula", "role": "Senior Finance Manager at Novartis"}, {"name": "Hemanth Merapala", "role": "Amgen | Ex-Novartis"}, {"name": "Hanoz Tarapore, CSCP", "role": "Asia Pacific Supply Chain Leader | Warehousing & Logistics | Cold Chain Operations | Demand & Supply Planning | S&OP | Data Analytics | Healthcare Supply Chain | People Leader | Mentor | APICS CSCP | Ex-Johnson & Johnson"}, {"name": "Jitendra Kumar Bothra \u2605", "role": "Founder & Chief Mentor of Harmony Global Partner | Business Strategy & Distribution Consultant | Wealth Management, IMF & IM Models, Supply Chain Financing | Driving Multi-Service Growth & Client Impact"}, {"name": "Ravi Kumar Sumit", "role": "CFO & Strategic Finance Leader | Capital Raising, Debt Restructuring, M&A & Treasury | Middle East & Africa | FCA"}, {"name": "Pragya Smriti", "role": "Regulatory Writer at Novartis | Ex-Pfizer | M.Pharm"}, {"name": "Rajesh Sankpal", "role": "Senior Manager \u2013 Finance and Accounts | eCFO (IIM Nagpur) | Finance & Accounting Professional | Financial Planning and Analytics | Corporate Finance | Financial Strategy"}, {"name": "Ritu Saini", "role": "Novartis | Ex-Standard Chartered, JP Morgan, Vistara, HSBC"}, {"name": "Sindhuja Devulapalli", "role": "Senior Finance Analyst \u2013 IA&R Operations at CBRE"}, {"name": "Sowjanya Chintakayala", "role": "Senior Manager Finance, IMI BPA at Novartis Hyderabad"}], "Post 11": [{"name": "Ravi Dakliya", "role": "Partner, Khandelwal Jain & Co. Chartered Accountants"}, {"name": "Shreyansh Sethia", "role": "Partner at Gulgulia & Co."}, {"name": "Nidhi Jain", "role": "Lead BPA at Novartis"}, {"name": "Dick Mody", "role": "Founder & CEO at Ethical Advisers"}, {"name": "Sai Kiran Peddapally, CA", "role": "Senior Financial Analyst at Novartis | Digital & Predictive Finance | AI-Driven Sales & Cash Forecasting on SAP Analytics Cloud | Chartered Accountant | Finance Data and Decision-Making Across 100+ Markets"}, {"name": "Smita Kankaria", "role": "Finance Professional with Experience in Fintech, Financial Services and Consulting"}, {"name": "Neha Sharma", "role": "Corporate Finance | FP&A | Workforce Planning"}, {"name": "Deep Bhandari", "role": "Shaping Future-Ready Pharma & Healthcare Leaders | Executive Coach | NMIMS Visiting Faculty | Senior Consultant at Innovara Inc."}, {"name": "Hemanth Merapala", "role": "Amgen | Ex-Novartis"}, {"name": "Irfan Parkar", "role": "CFO, Levant | INSEAD GEMBA \u201926"}, {"name": "Aanandraj Panneerselvam", "role": "Enterprise Risk Management | Internal Audit | SOX Governance & Assessment | Operational & Regulatory Process Management | Risk Analytics"}], "Post 12": [{"name": "Vishnu Siddabathula", "role": "Senior Business Planning Analyst at Novartis"}, {"name": "Maria Pirillo", "role": "Senior BPA Manager"}, {"name": "Anand A Deshpande, CFA", "role": "Finance Leader | FP&A | Business Finance"}, {"name": "Krishna S N G", "role": "Human Resources Executive at Sandoz"}, {"name": "Pramod Jain", "role": "Vice President \u2013 ICRM at Citi"}, {"name": "Aashok Kumar Ranga", "role": "IIM Nagpur | Imperial UK | Global Head of Finance | Finance Director | FP&A | CFO Advisory | M&A | $120M+ Portfolio | SAP | Oracle | Power BI"}, {"name": "Aniruddha Chanda", "role": "Head \u2013 BPA Center of Excellence, Operations Finance"}, {"name": "Lavina Jain", "role": "Audit Senior Manager, Deloitte & Touche LLP"}, {"name": "Pooja Mandhana", "role": "FP&A & Transformation Leader | Scaling GCC Capabilities | Digital Finance & Process Excellence | Strategy & Project Management \u2013 Pharma, IT & BFSI | Team Management"}, {"name": "Arjun Kuntay", "role": "Group Head (Director) | International Finance CoE | Data & Digital Expert"}, {"name": "Nidhi Jain", "role": "Lead BPA at Novartis"}, {"name": "Hemanth Merapala", "role": "Amgen | Ex-Novartis"}, {"name": "Raghavendra Pathak", "role": "Head \u2013 FP&A | Strategic Finance Leader | CFO Business Partner | GCC Finance | Forecasting & Analytics"}, {"name": "CA Raju Radharapu", "role": "Senior Financial Analyst \u2013 US Commercial BPA at Novartis"}, {"name": "Naga Siva kumar Kondri", "role": "Valuation Advisor | Financial Modelling | Financial Planning & Analysis"}, {"name": "Rahul Ranjan", "role": "Financial Planning & Analysis (FP&A) | Financial Reporting | Cost Management | Business Partnering | Process Transformation | People Development"}, {"name": "Yash Kothari", "role": "Director at EY | Deal Advisory"}, {"name": "Kuntal Doctor", "role": "Lead REFS EMEA & LACAN BPA at Novartis"}, {"name": "CA Keerthanaa S S", "role": "Chartered Accountant | Senior Finance Specialist | B.Com (Accounting & Finance)"}]};
+
+// ---- Rail nav active state ----
+(function(){
+  var links = document.querySelectorAll('#railNav a');
+  var sections = [];
+  links.forEach(function(l){
+    var id = l.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if(el) sections.push({id:id, el:el, link:l});
+  });
+  function onScroll(){
+    var y = window.scrollY + 120;
+    var active = sections[0];
+    for(var i=0;i<sections.length;i++){
+      if(sections[i].el.offsetTop <= y) active = sections[i];
+    }
+    links.forEach(function(l){ l.classList.remove('active'); });
+    if(active) active.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+// ---- Chart.js ----
+function safeChart(id, cfg){
+  window.addEventListener('chartjs-ready', function(){
+    try{
+      var ctx = document.getElementById(id);
+      if(!ctx) return;
+      if(typeof Chart === 'undefined') return;
+      new Chart(ctx, cfg);
+    } catch(e){ console.warn('Chart error', id, e); }
+  }, {once:true});
+}
+
+// ---- Content chart ----
+safeChart('chartContent', {
+  type: 'bar',
+  data: {
+    labels: POSTS.map(function(p){ return p.label; }),
+    datasets: [
+      {
+        label: 'Impressions',
+        data: POSTS.map(function(p){ return p.impressions; }),
+        backgroundColor: 'rgba(31,111,99,0.75)',
+        borderColor: '#1F6F63',
+        borderWidth: 1,
+        yAxisID: 'yLeft',
+        order: 2
+      },
+      {
+        label: 'Engagement Rate (%)',
+        data: POSTS.map(function(p){ return p.eng_rate; }),
+        type: 'line',
+        borderColor: '#B8892F',
+        backgroundColor: 'rgba(184,137,47,0.12)',
+        pointBackgroundColor: '#B8892F',
+        pointRadius: 5,
+        tension: 0.35,
+        yAxisID: 'yRight',
+        order: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { font: { family: 'Inter', size: 12 }, boxWidth: 12 } },
+      tooltip: { callbacks: {
+        label: function(ctx){
+          if(ctx.dataset.label === 'Engagement Rate (%)') return ctx.dataset.label + ': ' + ctx.raw + '%';
+          return ctx.dataset.label + ': ' + ctx.raw.toLocaleString();
+        }
+      } }
+    },
+    scales: {
+      yLeft: { type:'linear', position:'left', beginAtZero:true,
+        title:{ display:true, text:'Impressions', font:{ family:'Inter', size:11 } },
+        ticks:{ font:{ family:'Inter', size:11 } }
+      },
+      yRight: { type:'linear', position:'right', beginAtZero:true,
+        title:{ display:true, text:'Eng. Rate (%)', font:{ family:'Inter', size:11 } },
+        grid:{ drawOnChartArea:false },
+        ticks:{ callback:function(v){ return v+'%'; }, font:{ family:'Inter', size:11 } }
+      },
+      x: { ticks:{ font:{ family:'Inter', size:12 } } }
+    }
+  }
+});
+
+// ---- People tabs ----
+(function(){
+  var tabs = document.getElementById('peopleTabs');
+  var panel = document.getElementById('peoplePanel');
+  var postKeys = Object.keys(PEOPLE);
+
+  function renderTab(key){
+    tabs.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+    tabs.querySelector('[data-key="'+key+'"]').classList.add('active');
+    var list = PEOPLE[key];
+    var html = '<div class="people-grid">';
+    list.forEach(function(p){
+      var role = p.role;
+      var short = role.length > 90 ? role.slice(0,87) + '...' : role;
+      html += '<div class="person"><div class="name">'+escHtml(p.name)+'</div>';
+      html += '<div class="role">'+escHtml(short)+'</div></div>';
+    });
+    html += '</div>';
+    html += '<p class="row-count" style="margin-top:12px;">'+list.length+' professionals engaged on '+key+'</p>';
+    panel.innerHTML = html;
+  }
+
+  function escHtml(s){
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  postKeys.forEach(function(key){
+    var btn = document.createElement('button');
+    btn.textContent = key + ' (' + PEOPLE[key].length + ')';
+    btn.setAttribute('data-key', key);
+    btn.addEventListener('click', function(){ renderTab(key); });
+    tabs.appendChild(btn);
+  });
+
+  if(postKeys.length > 0) renderTab(postKeys[0]);
+})();
+</script>
+</body>
+</html>
